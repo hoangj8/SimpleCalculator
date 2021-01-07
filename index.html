@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+	<title>Simple Calculator</title>
+	<style>
+		@import url(calculator.css);
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			var finished=false;
+			var expression="";
+			var memory="";
+			$("button").on("click", function(){
+				var buttonValue=$(this).val();
+				if(buttonValue=="="){
+					var result=eval(expression);
+					$("textarea").val($("textarea").val()+ '\r\n' + "RESULT: "+result + '\r\n');
+					expression="";
+					memory=$("textarea").val();
+				}
+				else if(buttonValue=="delete"){
+					expression=expression.substring(0,expression.length-1);
+					$("textarea").val(memory+expression);
+				}
+				else{
+					expression+=buttonValue;
+					$("textarea").val(memory+expression);
+				}
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+	<div id="calculator">
+	<div id="screen">
+	<textarea readonly="true" placeholder="Use the buttons below to start calculating!" rows=4></textarea>
+	</div>
+	<div id="calculatorbuttons">
+			<button value="0" id="zero">0</button>
+			<button value="1" id="one">1</button>
+			<button value="2" id="two">2</button>
+			<button value="3" id="three">3</button>
+			<button value="4" id="four">4</button>
+			<button value="5" id="five">5</button>
+			<button value="6" id="six">6</button>
+			<button value="7" id="seven">7</button>
+			<button value="8" id="eight">8</button>
+			<button value="9" id="nine">9</button>
+		
+			<button value="." id="decimal">.</button>
+			<button value="+" id="plus">+</button>
+			<button value="-" id="minus">-</button>
+			<button value="*" id="multiply">*</button>
+			<button value="/" id="divide">/</button>
+			<button value="=" id="equals">=</button>
+			<button value="delete" id="del">del</button>
+	</div>
+</div>
+</body>
+
+<footer>
+</footer>
+
+</html>
